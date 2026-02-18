@@ -1,129 +1,196 @@
-import React, { useState } from "react";
-// Questa riga "pesca" la foto che hai appena caricato nella cartella src
+import React, { useState, useEffect } from "react";
 import weddingImg from "./cozy-couple.jpeg";
+import villaImg from "./villa zarri.jpg"; // La nuova foto della location
 
 export default function App() {
   const [confirmed, setConfirmed] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  const mapEmbedUrl =
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2842.2384734791845!2d11.36531331252329!3d44.57164479262828!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477fd37380f5888d%3A0x62957f864459f1c7!2sVilla%20Zarri!5e0!3m2!1sit!2sit!4v1708280000000!5m2!1sit!2sit";
 
   return (
-    <div className="min-h-screen bg-[#FDF8F3] text-[#5D4037] font-sans selection:bg-[#EBD4C1]">
-      {/* --- HERO SECTION: CALDA E AVVOLGENTE --- */}
-      <header className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* L'immagine anime come sfondo */}
-        <div className="absolute inset-0 z-0">
+    <div className="min-h-screen bg-[#FDF8F3] text-[#5D4037] font-sans selection:bg-[#D97B45]/20 antialiased">
+      {/* --- HERO SECTION: REFINED --- */}
+      <header
+        className={`transition-all duration-[1.5s] ease-out transform ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        } pt-24 pb-12 px-6 text-center`}
+      >
+        <span className="text-[10px] tracking-[0.8em] uppercase text-[#8C7B70] mb-6 block ml-[0.8em]">
+          Save the Date
+        </span>
+
+        <h1 className="serif text-7xl md:text-[10rem] text-[#D97B45] italic font-light leading-none">
+          Alice{" "}
+          <span className="text-3xl md:text-5xl not-italic align-middle mx-2 text-[#5D4037]/20">
+            &
+          </span>{" "}
+          Edoardo
+        </h1>
+
+        {/* CONTENITORE FOTO LOCATION (Riempie lo spazio vuoto con eleganza) */}
+        <div className="mt-16 max-w-5xl mx-auto overflow-hidden rounded-2xl shadow-sm group">
           <img
-            src={weddingImg}
-            className="w-full h-full object-cover opacity-60 scale-105"
-            alt="Alice & Edoardo"
+            src={villaImg}
+            alt="Villa Zarri"
+            className="w-full h-[300px] md:h-[450px] object-cover scale-105 group-hover:scale-100 transition-transform duration-[5s] ease-out shadow-inner"
           />
-          {/* Sfumatura per far leggere bene i nomi */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#FDF8F3]/20 via-transparent to-[#FDF8F3]"></div>
         </div>
 
-        <div className="relative z-10 text-center px-4 fade-in">
-          <h1 className="serif text-7xl md:text-9xl mb-2 text-[#D97B45] drop-shadow-md italic font-light">
-            Alice{" "}
-            <span className="text-4xl md:text-6xl not-italic text-[#5D4037] mx-2">
-              &
-            </span>{" "}
-            Edoardo
-          </h1>
-          <p className="text-lg md:text-xl tracking-[0.4em] uppercase font-light text-[#8C7B70] mb-10">
-            Finalmente Sposi
+        <div className="mt-12 flex flex-col items-center">
+          <p className="serif text-2xl md:text-4xl tracking-[0.2em] uppercase font-light">
+            05 . 09 . 2026
           </p>
-          <div className="inline-block border-y border-[#D97B45]/30 py-4 px-10">
-            <p className="serif text-3xl md:text-4xl tracking-widest uppercase text-[#5D4037]">
-              24 . 06 . 2026
-            </p>
-          </div>
+          <div className="w-12 h-[1px] bg-[#D97B45] my-4"></div>
+          <p className="text-xs tracking-[0.4em] text-[#8C7B70] uppercase">
+            Villa Zarri • Castel Maggiore
+          </p>
         </div>
       </header>
 
-      {/* --- SEZIONE DETTAGLI: PULITA E MINIMALE --- */}
-      <section className="max-w-6xl mx-auto py-32 px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div className="space-y-12">
-            <div className="border-l-2 border-[#D97B45] pl-8">
-              <h3 className="serif text-4xl mb-4 italic">La Cerimonia</h3>
-              <p className="text-xl text-[#8C7B70] font-light">
-                Ore 11:00 <br />
-                Chiesa di Santa Maria, Roma
-              </p>
-              <button className="mt-4 text-xs uppercase tracking-widest text-[#D97B45] font-bold border-b border-transparent hover:border-[#D97B45] transition-all pb-1">
-                Visualizza Mappa
-              </button>
-            </div>
-
-            <div className="border-l-2 border-[#D97B45] pl-8">
-              <h3 className="serif text-4xl mb-4 italic">Il Ricevimento</h3>
-              <p className="text-xl text-[#8C7B70] font-light">
-                Ore 13:30 <br />
-                Villa Allegra, Via Appia Antica
-              </p>
-              <button className="mt-4 text-xs uppercase tracking-widest text-[#D97B45] font-bold border-b border-transparent hover:border-[#D97B45] transition-all pb-1">
-                Indicazioni Stradali
-              </button>
+      {/* --- MAIN CONTENT: EDITORIAL GRID --- */}
+      <main className="max-w-7xl mx-auto px-6 py-24">
+        <div className="grid lg:grid-cols-12 gap-20 items-center">
+          {/* Foto di Coppia (Emotional) */}
+          <div className="lg:col-span-6 relative">
+            <div className="relative overflow-hidden rounded-3xl shadow-2xl aspect-[3/4]">
+              <img
+                src={weddingImg}
+                className="w-full h-full object-cover"
+                alt="Alice e Edoardo"
+              />
+              <div className="absolute inset-0 border-[15px] border-[#FDF8F3]/10 pointer-events-none"></div>
             </div>
           </div>
 
-          {/* Immagine secondaria o decorativa */}
-          <div className="hidden md:block relative group">
-            <div className="absolute -inset-4 border border-[#D97B45]/20 rounded-2xl transform rotate-3 group-hover:rotate-0 transition-transform duration-500"></div>
-            <img
-              src={weddingImg}
-              className="relative z-10 rounded-2xl shadow-2xl filter sepia-[0.2]"
-              alt="Dettaglio Alice & Edoardo"
-            />
+          {/* Dettagli (Informational) */}
+          <div className="lg:col-span-6 space-y-16">
+            <section className="relative">
+              <span className="serif text-8xl absolute -top-10 -left-6 opacity-[0.03] pointer-events-none">
+                Details
+              </span>
+              <h2 className="serif text-5xl mb-10 italic relative z-10">
+                Il Rito e la Festa
+              </h2>
+
+              <div className="space-y-10 border-l border-[#D97B45]/20 pl-8">
+                <div className="relative">
+                  <div className="absolute -left-[34.5px] top-2 w-3 h-3 bg-[#D97B45] rounded-full"></div>
+                  <p className="text-[10px] uppercase tracking-widest text-[#D97B45] font-bold mb-2">
+                    Dove
+                  </p>
+                  <p className="text-3xl font-light">Villa Zarri</p>
+                  <p className="text-[#8C7B70] text-lg">
+                    Via Ronco, 1 — Castel Maggiore (BO)
+                  </p>
+                </div>
+
+                <div className="relative">
+                  <div className="absolute -left-[34.5px] top-2 w-3 h-3 bg-[#D97B45] rounded-full"></div>
+                  <p className="text-[10px] uppercase tracking-widest text-[#D97B45] font-bold mb-2">
+                    Quando
+                  </p>
+                  <p className="text-3xl font-light">Sabato 05.09.2026</p>
+                  <p className="text-[#8C7B70] text-lg">
+                    Il ricevimento inizierà alle ore 17:00
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* Mappa (Utility) */}
+            <div className="rounded-2xl overflow-hidden shadow-xl border border-white h-72 group relative">
+              <iframe
+                title="Mappa"
+                src={mapEmbedUrl}
+                className="w-full h-full border-0 grayscale group-hover:grayscale-0 transition-all duration-1000"
+                allowFullScreen=""
+                loading="lazy"
+              ></iframe>
+            </div>
           </div>
         </div>
-      </section>
+      </main>
 
-      {/* --- RSVP: DESIGN MODERNO --- */}
-      <section className="bg-[#1F1F1F] text-[#FDF8F3] py-32 px-6 rounded-t-[3rem] md:rounded-t-[5rem]">
+      {/* --- RSVP: THE CALL TO ACTION --- */}
+      <section className="bg-[#1F1F1F] text-[#FDF8F3] py-40 px-6 rounded-t-[4rem] md:rounded-t-[10rem]">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="serif text-5xl md:text-6xl mb-8 italic">Ci sarete?</h2>
-          <p className="font-light text-stone-400 mb-12">
-            La vostra presenza è il regalo più bello. Confermate entro il 30
-            Aprile.
+          <h2 className="serif text-6xl md:text-8xl mb-8 italic">Ci sarete?</h2>
+          <p className="font-light text-stone-400 mb-16 text-lg tracking-wide">
+            Saremmo onorati di festeggiare con voi. <br />
+            Confermate gentilmente entro il{" "}
+            <span className="text-[#D97B45] font-medium italic border-b border-[#D97B45]/40">
+              15 Luglio 2026
+            </span>
+            .
           </p>
 
           {!confirmed ? (
             <form
-              className="space-y-8"
+              className="space-y-10"
               onSubmit={(e) => {
                 e.preventDefault();
                 setConfirmed(true);
               }}
             >
-              <input
-                type="text"
-                placeholder="Nome e Cognome"
-                className="w-full bg-transparent border-b border-stone-700 py-4 focus:border-[#D97B45] outline-none transition-colors serif text-2xl placeholder:text-stone-800"
-                required
-              />
-              <button className="group relative w-full py-5 border border-[#D97B45]/50 hover:border-[#D97B45] transition-all overflow-hidden rounded-full">
-                <span className="relative z-10 uppercase tracking-[0.3em] text-xs font-bold text-[#D97B45]">
-                  Conferma Presenza
-                </span>
-                <div className="absolute inset-0 bg-[#D97B45] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
-                <style>{`.group:hover span { color: white; }`}</style>
+              <div className="grid md:grid-cols-2 gap-8 text-left">
+                <div className="space-y-2">
+                  <label className="text-[10px] uppercase tracking-widest text-stone-500">
+                    Nome e Cognome
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="I vostri nomi"
+                    className="w-full bg-transparent border-b border-stone-800 py-3 focus:border-[#D97B45] outline-none transition-all serif text-2xl text-white placeholder:text-stone-900"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] uppercase tracking-widest text-stone-500">
+                    Note o Intolleranze
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Eventuali allergie"
+                    className="w-full bg-transparent border-b border-stone-800 py-3 focus:border-[#D97B45] outline-none transition-all text-lg text-white placeholder:text-stone-900"
+                  />
+                </div>
+              </div>
+
+              <button className="w-full py-6 mt-8 border border-[#D97B45] text-[#D97B45] hover:bg-[#D97B45] hover:text-white rounded-full transition-all duration-500 uppercase tracking-[0.5em] text-xs font-bold">
+                Invia Conferma
               </button>
             </form>
           ) : (
-            <div className="p-12 border border-[#D97B45]/30 rounded-[2rem] animate-fade-in">
-              <p className="serif text-3xl italic text-[#D97B45]">
-                Vi aspettiamo con gioia!
+            <div className="py-20 animate-fade-in border border-[#D97B45]/20 rounded-3xl bg-white/[0.02]">
+              <h3 className="serif text-4xl italic text-white mb-2">
+                Grazie di cuore!
+              </h3>
+              <p className="text-stone-500 uppercase tracking-widest text-xs">
+                Conferma ricevuta con successo
               </p>
             </div>
           )}
         </div>
       </section>
 
-      <footer className="py-20 text-center opacity-30 bg-[#1F1F1F]">
-        <p className="serif text-xl italic mb-2 text-[#FDF8F3]">A & E</p>
-        <p className="text-[10px] tracking-[0.5em] uppercase text-[#FDF8F3]">
-          2026 • Rome, Italy
-        </p>
+      {/* --- FOOTER --- */}
+      <footer className="py-20 text-center bg-[#1F1F1F] border-t border-white/5">
+        <div className="opacity-30 flex flex-col items-center gap-6">
+          <p className="serif text-3xl italic">A & E</p>
+          <div className="flex items-center gap-6 text-[10px] tracking-[0.6em] uppercase">
+            <span>05</span>
+            <div className="w-1.5 h-1.5 bg-[#D97B45] rounded-full"></div>
+            <span>09</span>
+            <div className="w-1.5 h-1.5 bg-[#D97B45] rounded-full"></div>
+            <span>2026</span>
+          </div>
+        </div>
       </footer>
     </div>
   );
